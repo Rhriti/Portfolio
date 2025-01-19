@@ -6,6 +6,7 @@
   <link type="text/css"
         rel="stylesheet"
         href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/showdown/dist/showdown.min.js"></script>
 <title>Hritij R</title> 
 </head> 
 <body> 
@@ -28,7 +29,7 @@
     </ul>
     <p>
     <b>Links:</b>
-    <a href="cv/Hritij__CV.pdf" target="_blank">CV</a> &bull;  
+    <a href="https://www.linkedin.com/in/hritijrana/" target="_blank">Linkedin</a> &bull;  
     <a href="https://x.com/HritijRana" target="_blank">Twitter</a> &bull; 
     <a href="https://github.com/Rhriti" target="_blank">GitHub</a> &bull; 
     <a href="https://leetcode.com/u/_parshuram/" target="_blank">LeetCode</a> &bull; 
@@ -127,8 +128,6 @@
         </div>
       </td>
       <td class="image">
-        <!-- <img class="side-image" src="images/vehicle.png" style="padding: 0px 16px"> -->
-      </td>
     </tr>
 
     </tbody>
@@ -147,8 +146,12 @@
 
 </div>
 
- <div id="blog_place">
+ <div id="blog_place" class="">
+  <table>
+    <tbody>
 
+    </tbody>
+  </table>
  </div>
 <hr>
 
@@ -156,14 +159,51 @@
 </div> <!-- end places -->
 
 <script>
-    function showContent(sectionId,event){
-      event.preventDefault();
-      const elements = document.querySelectorAll("[id$='_place']");
-      console.log(elements);
-      elements.forEach(element => element.classList.add('hidden'));
-      document.getElementById(sectionId).classList.remove('hidden');
-    }
+
+  function showContent(sectionId, event) {
+    event.preventDefault();
+    const elements = document.querySelectorAll("[id$='_place']");
+    elements.forEach((element) => element.classList.add('hidden'));
+    document.getElementById(sectionId).classList.remove('hidden');
+  }
+
+  const converter = new showdown.Converter();
+  function fetchBlogs() {
+
+        const blogFiles=['blog1.md'];
+
+        const blogSection = document.querySelector("#blog_place tbody");
+
+        blogFiles.forEach(blogFile => {
+          const blogPath = `blogs/${blogFile}`;
+
+          fetch(blogPath)
+            .then(response => {
+              if (!response.ok) {
+                throw new Error(`Failed to load ${blogFile}`);
+              }
+              return response.text();
+            })
+            .then(markdown => {
+              //const htmlContent = converter.makeHtml(markdown);
+              const htmlContent=markdown;
+              // Create a <tr> and <td> for the blog
+              const blogRow = document.createElement('tr');
+              const blogCell = document.createElement('td');
+              blogCell.innerHTML = `<div class="highlights">${htmlContent}</div>`;
+              blogRow.appendChild(blogCell);
+
+              blogSection.appendChild(blogRow);
+            })
+            .catch(error => console.error("Error loading blog:", error));
+      })
+      .catch(error => console.error("Error fetching blog list:", error));
+  }
+
+  // Call fetchBlogs on page load
+  document.addEventListener("DOMContentLoaded", fetchBlogs);
 </script>
+
 
 </body> 
 
