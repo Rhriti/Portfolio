@@ -135,7 +135,7 @@
 
 </div>
 
-<div id="award_place" class="hidden">
+<div id="award_place" class="hidden highlights">
   <ul style="list-style-type: disc;">
     <li style="margin-bottom: 5px;">Won several hackathons and coding competitions at college and national level</li>
     <li style="margin-bottom: 5px;">Secured <b>under 100</b> global rank @ renowned competitive coding platform like <b>CodeChef</b></li>
@@ -170,8 +170,7 @@
   const converter = new showdown.Converter();
   function fetchBlogs() {
 
-        const blogFiles=['blog1.md'];
-
+        const blogFiles=['blog2.md','blog1.md'];
         const blogSection = document.querySelector("#blog_place tbody");
 
         blogFiles.forEach(blogFile => {
