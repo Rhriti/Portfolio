@@ -1,0 +1,7 @@
+<h2 style="color: #245ab3;">RepoGPT vs Gitloop vs GitHub Co-Pilot</h2>
+Date-21/01/2025
+<p>
+there are times when you can't go through each and every file and function to get a overview of the internal working of a project/tool.So i am always in a lookout for better tools/agents that could get a grasp of a github repo. by going through each of its folder/files.I've been using github co-pilot in VS Code for more than a year and i don't find it that impressive in this context. also i think it has a smaller context-windows , maybe because i am using a free student version. when told explictly, it does go through each and every folder of the cloned repo. but fails to catch the nuances of the code/function calling/flow all those stuff.A week ago i found Gitloop which leveraged claude to chat with github repo.s and it did a fabulous job.by far the best that i've seen. it even got the flow of control, the function calling and how the different layers of an app interacted with each other via diagrams. thanks to claude.
+however it was a paid service and i couldn't dive more.
+And recently i explored repogpt which is an open-source project for the same.great that it's O.S but it wasn't up there like Gitloop.
+<p>
