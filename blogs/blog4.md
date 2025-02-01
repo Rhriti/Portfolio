@@ -1,0 +1,2 @@
+I've observed that startups aren't open to fresh minds who bring new perspectives. most of them are obsessed with frameworks and libraries and whether one is familiar with  'langchain' or 'crewAI' or not? 
+Personally, I've never used them coz I've never felt the need. I wish to give it a shot just to see what productivity it brings as compared to making direct api calls to LLM providers.
