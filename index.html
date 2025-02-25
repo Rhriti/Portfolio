@@ -6,6 +6,7 @@
   <link type="text/css"
         rel="stylesheet"
         href="style.css">
+
   <script src="https://cdn.jsdelivr.net/npm/showdown/dist/showdown.min.js"></script>
 <title>Hritij R</title> 
 </head> 
@@ -66,16 +67,17 @@
     <tr>
       <td>
         <div class=highlights>
-          <b>"Agent"</b><br>
+          <b>AI Judge</b><br>
           <p>
             What would happen if you let AI reason for the hackathon winner?
             <br><br>
             <b>The Story : </b>
             An AI Judge that compares every other submission, taking submission video and description into 
-            consideration to reason and announce winner based on the judging criteria and winner category.
+            consideration to reason and announce winner based on the judging criteria and winner category.It's a heads-on 1v1 battle among all the submissions ⚔️
             <br>
-            Don't trouble yourself with the thoughts of who's gonna be the winner. sit back and let 'AI judge' decide !   
+            Don't trouble yourself with the thoughts of who's gonna be the winner. sit back and let the 'AI judge' decide !   
           </p>
+          <blockquote class="twitter-tweet"><p lang="en" dir="ltr">I know how anxious it feels to wait for the winner announcement after a hefty <a href="https://twitter.com/devpost?ref_src=twsrc%5Etfw">@devpost</a> hackathon. I&#39;ve built this AI tool that does a head-on 1v1 for all the submission to arrive at a winner. <a href="https://t.co/nOlPbWFY8q">pic.twitter.com/nOlPbWFY8q</a></p>&mdash; Hritij Rana (@HritijRana) <a href="https://twitter.com/HritijRana/status/1893597079722754079?ref_src=twsrc%5Etfw">February 23, 2025</a></blockquote> 
         </div>
       </td>
     </tr>
@@ -177,7 +179,7 @@
 
 
 </div> <!-- end places -->
-
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 <script>
 
   function showContent(sectionId, event) {
@@ -189,37 +191,36 @@
 
   const converter = new showdown.Converter();
   function fetchBlogs() {
+  const blogFiles = ['blog4.md','blog3.md', 'blog2.md', 'blog1.md'];
+  const blogSection = document.querySelector("#blog_place tbody");
 
-        const blogFiles=['blog3.md','blog2.md','blog1.md'];
-        const blogSection = document.querySelector("#blog_place tbody");
-
-        blogFiles.forEach(blogFile => {
-          const blogPath = `blogs/${blogFile}`;
-
-          fetch(blogPath)
-            .then(response => {
-              if (!response.ok) {
-                throw new Error(`Failed to load ${blogFile}`);
-              }
-              return response.text();
-            })
-            .then(markdown => {
-              //const htmlContent = converter.makeHtml(markdown);
-              const htmlContent=markdown;
-              // Create a <tr> and <td> for the blog
-              const blogRow = document.createElement('tr');
-              const blogCell = document.createElement('td');
-              blogCell.innerHTML = `<div class="highlights">${htmlContent}</div>`;
-              blogRow.appendChild(blogCell);
-
-              blogSection.appendChild(blogRow);
-            })
-            .catch(error => console.error("Error loading blog:", error));
+  const fetchPromises = blogFiles.map(blogFile => {
+    const blogPath = `blogs/${blogFile}`;
+    return fetch(blogPath)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`Failed to load ${blogFile}`);
+        }
+        return response.text();
       })
-      .catch(error => console.error("Error fetching blog list:", error));
-  }
+      .then(markdown => {
+        return { blogFile, content: markdown }; // Return both file name and content
+      });
+  });
 
-  // Call fetchBlogs on page load
+  Promise.all(fetchPromises)
+    .then(blogs => {
+      blogs.forEach(blog => {
+        const blogRow = document.createElement('tr');
+        const blogCell = document.createElement('td');
+        blogCell.innerHTML = `<div class="highlights">${blog.content}</div>`;
+        blogRow.appendChild(blogCell);
+        blogSection.appendChild(blogRow);
+      });
+    })
+    .catch(error => console.error("Error loading blogs:", error));
+}
+
   document.addEventListener("DOMContentLoaded", fetchBlogs);
 </script>
 
