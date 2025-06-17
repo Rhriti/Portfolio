@@ -38,10 +38,37 @@
 
   </div>
   <div style="float:left">  
-    <img class="mug center" style="max-width:80%" src="cc.jpeg" alt="Hritij Rana"> 
+    <div class="media-container" style="cursor: pointer;" onclick="toggleProfileMedia(this)">
+      <img class="mug center" style="max-width:80%; display: block;" src="cc.jpeg" alt="Hritij Rana">
+      <video class="mug center" style="max-width:80%; display: none;" src="videoplayback (1).mp4" onended="handleVideoEnd(this)"></video>
+    </div>
   </div>
 
 </div>
+
+<script>
+function handleVideoEnd(video) {
+    const container = video.parentElement;
+    const img = container.querySelector('img');
+    video.style.display = 'none';
+    img.style.display = 'block';
+}
+
+function toggleProfileMedia(container) {
+    const img = container.querySelector('img');
+    const video = container.querySelector('video');
+    if (img.style.display !== 'none') {
+        img.style.display = 'none';
+        video.style.display = 'block';
+        video.play();
+    } else {
+        video.pause();
+        video.currentTime = 0;
+        video.style.display = 'none';
+        img.style.display = 'block';
+    }
+}
+</script>
 
 <hr>
 <div class="navigation_list">
